@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Song Details</title>
+    <style>
+        /* Overall Site Styling */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #333; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        main { width: 100%; max-width: 800px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); margin: 20px 0; }
+        h1, h2, h3, h4 { color: #2c3e50; }
+        a { color: #3498db; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        button { cursor: pointer; font-size: 1em; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease, transform 0.2s ease; border: none; }
+        button:hover { transform: translateY(-2px); }
+        hr { border: 0; height: 1px; background-color: #ddd; margin: 20px 0; }
+        
+        /* Page Specific Styling */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .song-pfp {
+            width: 180px;
+            height: 180px;
+            background-color: #eee;
+            border-radius: 8px;
+            flex-shrink: 0;
+            margin-bottom: 10px;
+        }
+        
+        .song-meta p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .song-meta strong {
+            color: #2c3e50;
+        }
+        
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: 15px;
+        }
+
+        .download-button {
+            background-color: #2ecc71;
+            color: white;
+            font-weight: bold;
+        }
+
+        .download-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .comments-section {
+            margin-top: 20px;
+        }
+
+        .comments-section textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .comments-section .comment-button {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .comment-list .comment-box {
+            display: flex;
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            gap: 15px;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .comment-pfp {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ddd;
+            flex-shrink: 0;
+        }
+
+        .comment-content {
+            flex-grow: 1;
+        }
+
+        .comment-meta {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .comment-text {
+            margin-top: 5px;
+        }
+
+        .comment-actions {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .comment-actions .reply-link {
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .comment-like-container {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            text-align: center;
+        }
+        
+        .comment-like-button {
+            font-size: 1.5em;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #e74c3c; /* A nice red for the heart */
+        }
+
+        .comment-like-count {
+            font-size: 0.8em;
+            color: #555;
+            margin-top: 5px;
+        }
+        
+        .difficulty {
+            color: #f39c12; 
+            font-size: 1.5em;
+        }
+        
+        .difficulty .star { color: #ccc; }
+        .difficulty .filled { color: #f39c12; }
+
+        /* Style for the background audio player */
+        .audio-player {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main class="song-details-container">
+        <h1>Song Title</h1>
+        <hr>
+
+        <div class="details-grid">
+            <div class="left-panel">
+                <div class="song-pfp"></div>
+                <div class="song-meta">
+                    <p><strong>Creator:</strong> **Creator Name**</p>
+                    <p><strong>Uploader:</strong> **Uploader User**</p>
+                    <div style="margin-top: 20px;"></div>
+                    <p><strong>Uploaded:</strong> When it was uploaded/updated</p>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <button class="download-button">Download</button>
+                <div class="download-info">
+                    <p><strong>File Size:</strong> **size**</p>
+                    <p><strong>File Type:</strong> **type**</p>
+                </div>
+            </div>
+        </div>
+        
+        <audio controls class="audio-player">
+            <source src="song_file.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <hr>
+
+        <section class="song-info-section">
+            <div class="difficulty">
+                Difficulty:
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+            </div>
+
+            <h3>Song Description</h3>
+            <p>This is where the full song description will go. It can be a detailed explanation about the song, the chart, or any other relevant information the uploader wants to share with the community.</p>
+        </section>
+
+        <hr>
+
+        <section class="comments-section">
+            <h3>Comments</h3>
+            <form id="commentForm">
+                <textarea placeholder="Leave a comment..."></textarea>
+                <button type="submit" class="comment-button">Post Comment</button>
+            </form>
+
+            <div class="comment-list" id="commentList">
+                <div class="comment-box">
+                    <div class="comment-pfp"></div>
+                    <div class="comment-content">
+                        <p class="comment-meta">**Username**</p>
+                        <p class="comment-text">This is a comment. It is in a box. It is a good comment, yes indeed.</p>
+                        <div class="comment-actions">
+                            <span class="reply-link">Reply</span>
+                        </div>
+                    </div>
+                    <div class="comment-like-container">
+                        <button class="comment-like-button">❤️</button>
+                        <p class="comment-like-count">12</p>
+                    </div>
+                </div>
+                
+                <div class="comment-box">
+                    <div class="comment-pfp"></div>
+                    <div class="comment-content">
+                        <p class="comment-meta">**Another User**</p>
+                        <p class="comment-text">This is another comment. It is also in a box. Great song, I love it.</p>
+                        <div class="comment-actions">
+                            <span class="reply-link">Reply</span>
+                        </div>
+                    </div>
+                    <div class="comment-like-container">
+                        <button class="comment-like-button">❤️</button>
+                        <p class="comment-like-count">5</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Song</title>
+    <style>
+        /* Overall Site Styling */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #333; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        main { width: 100%; max-width: 800px; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); margin: 20px 0; }
+        h1, h2, h3, h4 { color: #2c3e50; }
+        a { color: #3498db; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        button { cursor: pointer; font-size: 1em; padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s ease, transform 0.2s ease; border: none; }
+        button:hover { transform: translateY(-2px); }
+
+        /* Page Specific Styling */
+        .upload-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .upload-container label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .upload-container input[type="text"],
+        .upload-container input[type="number"],
+        .upload-container textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Ensures padding doesn't affect total width */
+        }
+
+        .upload-container input[type="file"] {
+            padding: 10px 0;
+        }
+
+        .upload-container textarea {
+            resize: vertical; /* Allows user to resize the description box vertically */
+        }
+        
+        .upload-button {
+            background-color: #2ecc71;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+        }
+
+        .file-input-group {
+            border: 1px dashed #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main class="upload-container">
+        <h1>Upload a New Song</h1>
+        <form id="uploadForm">
+            <label for="song-name">Song Name:</label>
+            <input type="text" id="song-name" placeholder="e.g., Midnight Melody" required>
+
+            <label for="song-creator">Song Creator:</label>
+            <input type="text" id="song-creator" placeholder="e.g., Jane Doe" required>
+
+            <label for="difficulty">Difficulty (1-5):</label>
+            <input type="number" id="difficulty" min="1" max="5" placeholder="e.g., 3" required>
+
+            <div class="file-input-group">
+                <label for="song-file">Upload Song File (.mp3, .wav):</label>
+                <input type="file" id="song-file" accept=".mp3,.wav,.ogg" required>
+            </div>
+
+            <div class="file-input-group">
+                <label for="extra-file">Upload Beatmap File (.zip, .csv):</label>
+                <input type="file" id="extra-file" accept=".zip,.csv" required>
+            </div>
+            
+            <label for="description">Description:</label>
+            <textarea id="description" rows="5" placeholder="Enter a detailed description of the song..."></textarea>
+
+            <button type="submit" class="upload-button">Upload Song</button>
+        </form>
+    </main>
+</body>
+</html>
+
