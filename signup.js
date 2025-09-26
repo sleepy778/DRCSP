@@ -76,9 +76,8 @@ signup.addEventListener('submit', (event) => {
         console.error('Passwords do not match.');
         return;
     }
-    else if (codein === verificationToken) {
-        verified = true;
-        console.log('code verified successfully!');
+    else if (codein !== verificationToken) {
+        console.log('code verify failed!');
     } else {
         argon2.hash(password)
             .then(hash => {
