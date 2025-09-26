@@ -98,3 +98,31 @@ signup.addEventListener('submit', (event) => {
         }
     });
 });
+
+
+function Content() {
+    unhide();
+    delaybutton();
+    console.log('code sent');
+}
+
+function delaybutton() {
+    const button = document.getElementById('delaybutton');
+    button.disabled = true;
+    let countdown = 60;
+    button.textContent = `Please wait ${countdown} seconds`;
+    const interval = setInterval(() => {
+        countdown--;
+        button.textContent = `Please wait ${countdown} seconds`;
+        if (countdown <= 0) {
+            clearInterval(interval);
+            button.disabled = false;
+            button.textContent = 'Send Code';
+        }
+    }, 1000);
+}
+
+function unhide() {
+    const hiddenSection = document.getElementById('vf');
+    hiddenSection.style.display = 'block';
+}
