@@ -107,7 +107,7 @@ function Content() {
 }
 
 function delaybutton() {
-    const button = document.getElementById('delaybutton');
+    const button = document.getElementById('codesend');
     button.disabled = true;
     let countdown = 60;
     button.textContent = `Please wait ${countdown} seconds`;
