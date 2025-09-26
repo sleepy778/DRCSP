@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 async function dbconnect() {
-    const uri = "mongodb+srv://db1:darjart@cluster0.4ufoqfz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+    const uri = process.env.MONGO_URI;
     const client = new MongoClient(uri);
 
     try {
@@ -22,15 +22,17 @@ dbconnect().catch(console.error);
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
-// 1. Get references to the form and input fields
+check();
+const argon2 = require('argon2');
+const { sendVerificationEmail } = require('./email');
 const signup = document.getElementById('signup');
 const usernameInput = document.getElementById('usernameInput');
 const passwordInput = document.getElementById('passwordInput');
 const emailInput = document.getElementById('emailInput');
 const passwordConfirmInput = document.getElementById('passwordConfirmInput');
+const codeinput = document.getElementById('codeinput');
 
-process.on('exit', (code) => {
+process.on('exit', async (code) => {
     console.log(`Script exited with code: ${code}`);
     await client.close();
 });
@@ -40,6 +42,27 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 });
 
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    process.exit(1);
+});
+
+signup.addEventListener('codesend', (event) => {
+    event.preventDefault();
+    const email = emailInput.value;
+    const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
+    sendVerificationEmail(email, verificationToken)
+        .then(response => {
+            if (response.success) {
+                console.log('Verification email sent successfully.');
+            } else {
+                console.error('Failed to send verification email:', response.message);
+            }
+        })
+        .catch(err => {
+            console.error('Error sending verification email:', err);
+        });
+});
 
 signup.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -47,12 +70,16 @@ signup.addEventListener('submit', (event) => {
     const password = passwordInput.value;
     const email = emailInput.value;
     const passwordConfirm = passwordConfirmInput.value;
+    const codein =  codeinput.value;    
 
     if (password !== passwordConfirm) {
         console.error('Passwords do not match.');
         return;
     }
-    else {
+    else if (codein === verificationToken) {
+        verified = true;
+        console.log('code verified successfully!');
+    } else {
         argon2.hash(password)
             .then(hash => {
                 console.log('Password hashed successfully:', hash);
