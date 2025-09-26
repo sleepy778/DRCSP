@@ -99,7 +99,9 @@ signup.addEventListener('submit', (event) => {
     });
 });
 
-
+signup.addEventListener('codesend', (event) => {
+    Content();
+});
 function Content() {
     unhide();
     delaybutton();
