@@ -381,5 +381,53 @@
     console.info("Console Monitor Initialized. Ready to capture logs...");
     
 </script>
+<style>
+    /* Custom styles for the log viewer */
+    .log-entry {
+        padding: 4px 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: monospace;
+        font-size: 0.85rem;
+        white-space: pre-wrap; /* Preserve line breaks and wrapping */
+    }
+    .log-entry.log { color: #ffffff; }
+    .log-entry.warn { color: #facc15; } /* Tailwind yellow-400 */
+    .log-entry.error { color: #f87171; } /* Tailwind red-400 */
+    .log-entry.info { color: #60a5fa; } /* Tailwind blue-400 */
+
+    /* Styles for the monitor container */
+    .console-monitor-overlay {
+        position: fixed;
+        bottom: 0;
+       right: 0;
+        z-index: 1000;
+        max-width: 90vw;
+        transition: all 0.3s ease;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
+        border-top-left-radius: 8px;
+        overflow: hidden;
+    }
+
+    /* Styling for the small toggle button */
+    .console-toggle-btn {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 1001;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Scrollbar styling for a cleaner look */
+    .log-container::-webkit-scrollbar {
+        width: 8px;
+    }
+    .log-container::-webkit-scrollbar-thumb {
+        background-color: #4b5563; /* Tailwind gray-600 */
+        border-radius: 4px;
+    }
+    .log-container::-webkit-scrollbar-track {
+        background: #1f2937; /* Tailwind gray-800 */
+    }
+</style>
 </html>
 
