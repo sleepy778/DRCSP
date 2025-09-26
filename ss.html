@@ -165,9 +165,9 @@
             <input type="text" id="searchInput" placeholder="input song name here to search...">
         </div>
         <div class="action-buttons">
-            <button class="login-button" href="https://drcsp.vercel.app/login.html" id="loginButton">Login</button>
+            <button class="login-button" onclick="gotologin" id="loginButton">Login</button>
             
-        	<button class="upload-button" id="floatingUploadButton" href="https://drcsp.vercel.app/upload.html">☁️</button>
+        	<button class="upload-button" id="floatingUploadButton" onclick="gotoupload">☁️</button>
             
             <div class="user-pfp" id="userPFP">
                 <img src="https://via.placeholder.com/40" alt="User Profile Picture">
@@ -218,5 +218,13 @@
         </div>
     </div>
 </body>
+<script>    
+    function gototlogin() {
+        window.location.href = "https://drcsp.vercel.app/login.html";
+    }
+    function gotoupload() {
+        window.location.href = "https://drcsp.vercel.app/upload.html";
+    }
+</script>
 </html>
 
