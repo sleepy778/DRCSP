@@ -22,18 +22,17 @@ dbconnect().catch(console.error);
 
 
 document.addEventListener('DOMContentLoaded', () => {
-check();
+dbconnect();
 const argon2 = require('argon2');
-const { sendVerificationEmail } = require('./email');
 const signup = document.getElementById('signup');
 const usernameInput = document.getElementById('usernameInput');
 const passwordInput = document.getElementById('passwordInput');
-const emailInput = document.getElementById('emailInput');
 const passwordConfirmInput = document.getElementById('passwordConfirmInput');
-const codeinput = document.getElementById('codeinput');
 
 process.on('exit', async (code) => {
     console.log(`Script exited with code: ${code}`);
+    localStorage.removeItem('email');
+    localStorage.removeItem('verified');
     await client.close();
 });
 
@@ -47,37 +46,21 @@ process.on('unhandledRejection', (reason, promise) => {
     process.exit(1);
 });
 
-signup.addEventListener('codesend', (event) => {
-    event.preventDefault();
-    const email = emailInput.value;
-    const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
-    sendVerificationEmail(email, verificationToken)
-        .then(response => {
-            if (response.success) {
-                console.log('Verification email sent successfully.');
-            } else {
-                console.error('Failed to send verification email:', response.message);
-            }
-        })
-        .catch(err => {
-            console.error('Error sending verification email:', err);
-        });
-});
 
 signup.addEventListener('submit', (event) => {
     event.preventDefault();
     const username = usernameInput.value;
     const password = passwordInput.value;
-    const email = emailInput.value;
+    const email = localStorage.getItem('username');
+    const verified = localStorage.getItem('codeverified');
     const passwordConfirm = passwordConfirmInput.value;
-    const codein =  codeinput.value;    
 
     if (password !== passwordConfirm) {
         console.error('Passwords do not match.');
         return;
     }
-    else if (codein !== verificationToken) {
-        console.log('code verify failed!');
+    else if (verified !== 'true') {
+        console.log('not verified!');
     } else {
         argon2.hash(password)
             .then(hash => {
@@ -86,6 +69,10 @@ signup.addEventListener('submit', (event) => {
                 db.collection('users').insertOne(newUser)
                     .then(result => {
                         console.log('User registered successfully:', result.insertedId);
+                        localStorage.removeItem('email');
+                        localStorage.removeItem('verificationToken');
+                        localStorage.removeItem('codeverified');
+                        localStorage.setItem('loggedin', 'true');
                         window.location.href = 'login.html';
                     })
                     .catch(err => {
@@ -98,33 +85,3 @@ signup.addEventListener('submit', (event) => {
         }
     });
 });
-
-signup.addEventListener('codesend', (event) => {
-    Content();
-});
-function Content() {
-    unhide();
-    delaybutton();
-    console.log('code sent');
-}
-
-function delaybutton() {
-    const button = document.getElementById('codesend');
-    button.disabled = true;
-    let countdown = 60;
-    button.textContent = `Please wait ${countdown} seconds`;
-    const interval = setInterval(() => {
-        countdown--;
-        button.textContent = `Please wait ${countdown} seconds`;
-        if (countdown <= 0) {
-            clearInterval(interval);
-            button.disabled = false;
-            button.textContent = 'Send Code';
-        }
-    }, 1000);
-}
-
-function unhide() {
-    const hiddenSection = document.getElementById('vf');
-    hiddenSection.style.display = 'block';
-}

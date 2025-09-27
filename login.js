@@ -38,12 +38,13 @@ login.addEventListener('login', (event) => {
         .then(isVerified => {
             if (isVerified) {
                 console.log('Password verified successfully!');
+                localStorage.setItem('loggedin', 'true');
+                window.location.href = 'drcsp.vercel.app/ss.html';
             } else {
                 console.log('Invalid password.');
             }
         })
     .catch(err => {
-    // Handle errors (e.g., stored hash is corrupted)
             console.error(err);
         });
     });
