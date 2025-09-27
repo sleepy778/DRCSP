@@ -28,8 +28,9 @@ const login = document.getElementById('login');
 const usernameInput = document.getElementById('usernameInput');
 const passwordInput = document.getElementById('passwordInput');
 
-login.addEventListener('submit', (event) => {
+login.addEventListener('login', (event) => {
     event.preventDefault();
+    console.log('Login form submitted');
     const username = usernameInput.value;
     const password = passwordInput.value;
 
