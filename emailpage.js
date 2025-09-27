@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Ensure the DOM is fully loaded before running the script
         const { sendVerificationEmail } = require('./email');
         const emailInput = document.getElementById('email');
         const messageBox = document.getElementById('message-box');
@@ -23,7 +25,7 @@
                 setTimeout(() => {
                     // In a real application, you would navigate to the next page.
                     // For this example, we'll just log it.
-                    window.location.href = 'drcsp.vercel.app/email.html'; // Redirect to 2-step verification page
+                    window.location.href = 'https://drcsp.vercel.app/email.html'; // Redirect to 2-step verification page
                     console.log('Redirecting to 2-step verification page.');
                 }, 1500);
 
@@ -36,3 +38,13 @@
         window.onload = () => {
             emailInput.focus();
         };
+        // Handle the login button click
+        document.getElementById('login-button').addEventListener('click', handleLogin);
+        
+        // Handle the Enter key press in the email input field
+        emailInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    });
