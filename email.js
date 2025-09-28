@@ -6,7 +6,7 @@ const { Resend } = require('resend');
 // Initialize Resend with the API key from environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-async function sendVerificationEmail(recipientEmail, verificationToken) {
+export async function sendVerificationEmail(recipientEmail, verificationToken) {
     try {
         // 1. Define the email parameters for the Resend API.
         const sendOptions = {
@@ -42,5 +42,3 @@ async function sendVerificationEmail(recipientEmail, verificationToken) {
         return { success: false, message: 'Error sending email' };
     }
 }
-
-module.exports = { sendVerificationEmail };

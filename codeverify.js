@@ -1,4 +1,4 @@
-        const { sendVerificationEmail } = require('./email');
+        import { sendVerificationEmail } from './email.js';
         const otpContainer = document.getElementById('otp-container');
         const inputs = [...otpContainer.children];
         const messageBox = document.getElementById('message-box');

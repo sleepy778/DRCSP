@@ -5,11 +5,5 @@
     "mongodb": "^6.20.0",
     "nodemailer": "^7.0.6",
     "resend": "^6.1.0"
-  },
-  "devDependencies": {
-    "parcel": "^2.16.0"
-  },
-  "scripts": {
-    "build": "parcel build index.html"
   }
 }

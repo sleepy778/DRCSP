@@ -1,6 +1,7 @@
+import { sendVerificationEmail } from './email.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Ensure the DOM is fully loaded before running the script
-        const { sendVerificationEmail } = require('./email');
         const emailInput = document.getElementById('email');
         const messageBox = document.getElementById('message-box');
 
