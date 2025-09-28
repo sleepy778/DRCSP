@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 
 // Import the Resend SDK instead of Nodemailer
 const { Resend } = require('resend');
