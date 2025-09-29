@@ -10,11 +10,12 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom focus styles for better accessibility and design */
+        /* Custom focus styles to match the new green theme */
         .otp-input:focus {
             outline: none;
-            border-color: #4f46e5; /* indigo-600 */
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+            border-color: #2ecc71; /* Vibrant Green */
+            /* Adjusted box-shadow for accessibility and design */
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.3); 
         }
         /* Prevents the number input arrows from showing */
         .otp-input::-webkit-outer-spin-button,
@@ -25,48 +26,49 @@
         .otp-input[type=number] {
             -moz-appearance: textfield;
         }
+        /* Enforce light background colors from the theme */
+        .bg-gray-100 { background-color: #f0f2f5 !important; } /* Body background */
+        .bg-white { background-color: white !important; } /* Card background */
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-    <div class="w-full max-w-md mx-auto p-6 md:p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl">
+    <div class="w-full max-w-md mx-auto p-6 md:p-8 bg-white rounded-2xl shadow-xl">
         <div class="text-center">
-            <div class="inline-block p-3 bg-indigo-100 dark:bg-indigo-900 rounded-full mb-4">
-                <svg class="w-8 h-8 text-indigo-600 dark:text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <div class="inline-block p-3 bg-green-100 rounded-full mb-4">
+                <svg class="w-8 h-8 text-[#2ecc71]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                 </svg>
             </div>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">Two-Step Verification</h1>
-            <p class="text-gray-600 dark:text-gray-400 mt-2">
+            <h1 class="text-2xl md:text-3xl font-bold text-[#2c3e50]">Two-Step Verification</h1>
+            <p class="text-gray-600 mt-2">
                 We sent a verification code to your email. Enter the code from the email in the field below.
             </p>
         </div>
 
-        <!-- Verification Code Input Form -->
         <form class="mt-8 space-y-6" onsubmit="event.preventDefault(); handleVerification();">
             <div id="otp-container" class="flex justify-center items-center space-x-2 md:space-x-4">
-                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all duration-200 ease-in-out text-gray-900 dark:text-white" maxlength="1" />
-                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all duration-200 ease-in-out text-gray-900 dark:text-white" maxlength="1" />
-                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all duration-200 ease-in-out text-gray-900 dark:text-white" maxlength="1" />
-                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all duration-200 ease-in-out text-gray-900 dark:text-white" maxlength="1" />
-                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all duration-200 ease-in-out text-gray-900 dark:text-white" maxlength="1" />
-                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all duration-200 ease-in-out text-gray-900 dark:text-white" maxlength="1" />
+                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-white border-2 border-gray-300 rounded-lg focus:border-[#2ecc71] transition-all duration-200 ease-in-out text-gray-900" maxlength="1" />
+                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-white border-2 border-gray-300 rounded-lg focus:border-[#2ecc71] transition-all duration-200 ease-in-out text-gray-900" maxlength="1" />
+                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-white border-2 border-gray-300 rounded-lg focus:border-[#2ecc71] transition-all duration-200 ease-in-out text-gray-900" maxlength="1" />
+                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-white border-2 border-gray-300 rounded-lg focus:border-[#2ecc71] transition-all duration-200 ease-in-out text-gray-900" maxlength="1" />
+                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-white border-2 border-gray-300 rounded-lg focus:border-[#2ecc71] transition-all duration-200 ease-in-out text-gray-900" maxlength="1" />
+                <input type="number" class="otp-input w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-2xl font-semibold bg-white border-2 border-gray-300 rounded-lg focus:border-[#2ecc71] transition-all duration-200 ease-in-out text-gray-900" maxlength="1" />
             </div>
 
-            <!-- Message box -->
             <div id="message-box" class="hidden text-center text-sm p-3 rounded-lg"></div>
 
             <div>
-                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 ease-in-out">
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#2ecc71] hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2ecc71] transition-all duration-200 ease-in-out">
                     Verify
                 </button>
             </div>
         </form>
 
         <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm text-gray-600">
                 Didn't receive the code?
-                <button onclick="resendCode()" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+                <button onclick="resendCode()" class="font-medium text-[#3498db] hover:text-blue-600">
                     Resend Code
                 </button>
             </p>
@@ -76,9 +78,7 @@
     <script src="codeverify.js" ></script>
 
 </body>
-<head>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+</html>
 <style>
     /* ----------------------------------- */
     /* Custom Styling for Log Entries */
